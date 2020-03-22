@@ -380,7 +380,9 @@ async function updateAllPopScores(){
 }
 
 // RUN SERVER
-// app.listen(process.env.PORT, process.env.IP);
-app.listen(3000, function() {
-	console.log("Discsinthebag server is running...")
-})
+app.listen(process.env.PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
+// app.listen(3000, function() {
+// 	console.log("Discsinthebag server is running...")
+// })
