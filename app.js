@@ -373,6 +373,4 @@ async function updateAllPopScores(){
 }
 
 // RUN SERVER
-app.listen(3000, function() {
-	console.log("DiscsInTheBag server is running...")
-})
+app.listen(process.env.PORT, process.env.IP);
