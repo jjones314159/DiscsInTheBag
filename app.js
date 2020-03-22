@@ -13,7 +13,12 @@ var express 		= require("express"),
 
 // APP CONFIG
 //mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect("mongodb+srv://admin:Cf6ibPTGKtpAHvK3@cluster0-uywm1.mongodb.net/discsinthebag?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://admin:Cf6ibPTGKtpAHvK3@cluster0-uywm1.mongodb.net/discsinthebag?retryWrites=true&w=majority", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
+}).then(() => {
+		console.log("Database connected!");
+}).catch(err => {
+	console.log("Error: ", err.message);
+})
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -38,7 +43,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-// // Seed admin user
+// Seed admin user
 // var newUser = new Admin({
 // 	username: "admin",
 // 	password: "i8w6FpvA^rbt",
@@ -375,7 +380,7 @@ async function updateAllPopScores(){
 }
 
 // RUN SERVER
-app.listen(process.env.PORT, process.env.IP);
-// app.listen(3000, function() {
-// 	console.log("Discsinthebag server is running...")
-// })
+// app.listen(process.env.PORT, process.env.IP);
+app.listen(3000, function() {
+	console.log("Discsinthebag server is running...")
+})
