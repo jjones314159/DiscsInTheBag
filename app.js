@@ -381,7 +381,7 @@ async function updateAllPopScores(){
 
 // RUN SERVER
 app.listen(process.env.PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
+    console.log("Our app is running");
 });
 // app.listen(3000, function() {
 // 	console.log("Discsinthebag server is running...")
