@@ -1,0 +1,41 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+
+		<h1 style="text-align: center; padding-top: 50px">
+			Edit <%=pro.name%>
+		</h1>
+		<div style="width:30%; margin: 30px auto;">
+			<form action="/pros/<%=pro.url_name%>?_method=PUT" method="POST">
+				<div class="form-group">
+					Name <input class="form-control" type="text" value="<%=pro.name%>" name="pro[name]">
+				</div>
+				<div class="form-group">
+					URL Name <input class="form-control" type="text" value="<%=pro.url_name%>" name="pro[url_name]">
+				</div>
+				<div class="form-group">
+					Image URL <input class="form-control" type="text" value="<%=pro.image%>" name="pro[image]">
+				</div>
+				<div class="form-group">
+					Rank <input class="form-control" type="number" value="<%=pro.rank%>" name="pro[rank]">
+				</div>				
+				<div class="form-group">
+					Gender <input class="form-control" type="text" value="<%=pro.gender%>" name="pro[price]">
+				</div>				
+				<div class="form-group">
+					Sponsor <input class="form-control" type="text" value="<%=pro.sponsor%>" name="pro[sponsor]">
+				</div>				
+				<div class="form-group">
+					Last Bag Update <input class="form-control" type="text" value="<%=pro.last_bag_update%>" name="pro[last_bag_update]">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">
+					Submit
+					</button>
+				</div>
+			</form>
+		</div>
+
+</div>
+
+<%- include("../partials/footer") %>

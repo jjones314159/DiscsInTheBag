@@ -1,0 +1,51 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	<p>
+		<a href="/discs">< Back to Discs</a>
+	</p>
+	<div class="float-left pr-5">
+		<img src=<%=disc.image%> class="profile-image">
+	</div>
+	<div class="float-left">
+		<h2 class="profile-name"><%=disc.mold%></h2>
+		<p>Brand: <%=disc.brand%></p>
+		<p>Category: <%=disc.category%></p>
+		<p>Flight numbers: <%=disc.speed%> | <%=disc.glide%> | <%=disc.turn%> | <%=disc.fade%></p>
+		<p>Popularity Score: <%=disc.popularity_score%></p>
+	</div>
+
+	<div class="wrapper">
+		<div class="mb-3">
+			<h3>
+				Pros using this disc
+			</h3>
+		</div>
+		<div>
+			<table class="table">
+			  <thead>
+				<tr>
+				  <th scope="col">Name</th>
+				  <th scope="col">Plastic</th>
+				  <th scope="col">Weight</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				  <!-- for each pro see if they have any prodiscs matching the disc -->
+				<% pros.forEach(function(pro){ %>
+				  	<% pro.pro_discs.forEach(function(proDisc){ %>
+						<% if(proDisc.disc.id._id == disc.id){ %>
+							<tr>
+							  <td><a href="/pros/<%=pro.url_name%>"><%=pro.name%></a></td>
+							  <td><%=proDisc.plastic%></td>
+							  <td><%=proDisc.weight%>g</td>
+							  <td><a href="<%=proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-info">Buy <i class="fas fa-external-link-alt"></i></a></td>
+							</tr>
+				  		<% } %>
+				  	<% }) %>
+				<% }) %>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>

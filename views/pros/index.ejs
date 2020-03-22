@@ -1,0 +1,28 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	
+	<header class="jumbotron text-center p-1 align-middle">
+		Welcome! Select a pro below to see the discs in their bag.
+	</header>
+
+	<div class="row text-center">
+		<% pros.sort((a, b) => (a.rank > b.rank) ? 1 : -1) %>
+		<% pros.forEach(function(pro){ %>
+			<div class="col-md-3 col-sm-6 pro-card">
+				<a href="/pros/<%=pro.url_name%>">
+					<div class="card mb-md-4 mb-2">
+						<img src=<%=pro.image%> class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title"><%=pro.name%></h5>
+						</div>
+					</div>
+				</a>
+			</div>
+		<% }) %>
+	</div>
+	
+</div>
+	
+	
+<%- include("../partials/footer") %>

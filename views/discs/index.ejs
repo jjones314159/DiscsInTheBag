@@ -1,0 +1,27 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	
+	<header class="jumbotron text-center p-1 align-middle">
+		Welcome! Select a disc below to see more info and the pros who use it.
+	</header>
+
+	<div class="row text-center">
+		<% discs.sort((a, b) => (a.popularity_score < b.popularity_score) ? 1 : -1) %>
+		<% discs.forEach(function(disc){ %>
+			<div class="col-md-3 col-sm-6 pro-card">
+				<a href="/discs/<%=disc.mold%>">
+					<div class="card mb-md-4 mb-2">
+						<img src=<%=disc.image%> class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title"><%=disc.mold%></h5>
+						</div>
+					</div>
+				</a>
+			</div>
+		<% }) %>		
+	</div>
+</div>
+	
+	
+<%- include("../partials/footer") %>

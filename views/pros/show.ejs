@@ -1,0 +1,59 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	<p>
+		<a href="/pros">< Back to Pros</a>
+	</p>
+	<div class="float-left pr-5">
+		<img src=<%=pro.image%> class="profile-image">
+	</div>
+	<div class="float-left">
+		<h2 class="profile-name"><%=pro.name%></h2>
+		<p>Rank: <%=pro.rank%></p>
+		<p>Sponsor: <%=pro.sponsor%></p>
+		<p>Last bag update: <%=pro.last_bag_update%></p>
+	</div>
+	<!-- <div class="profile-disc-category float-left mt-5">
+		Distance Drivers
+	</div> -->
+	<div class="wrapper">
+		<div>
+			<table class="table">
+			  <thead>
+				<tr>
+				  <th scope="col">Category</th>
+				  <th scope="col">Mold</th>
+				  <th scope="col">Brand</th>
+				  <th scope="col">Plastic</th>
+				  <th scope="col">Weight</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<% pro.pro_discs.sort((a, b) => (a.disc.id.category > b.disc.id.category) ? 1 : (a.disc.id.category === b.disc.id.category) ? ((a.disc.id.mold > b.disc.id.mold) ? 1 : -1) : -1 ) %>
+				<% pro.pro_discs.forEach(function(proDisc){ %>
+					<tr>
+					  <td><%=proDisc.disc.id.category%></td>
+					  <td><a href="/discs/<%=proDisc.disc.id.mold%>"><%=proDisc.disc.id.mold%></a></td>
+					  <td><%=proDisc.disc.id.brand%></td>
+					  <td><%=proDisc.plastic%></td>
+					  <td><%=proDisc.weight%>g</td>
+					  <td>
+						  	<a href="<%=proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-info">Buy <i class="fas fa-external-link-alt"></i></a>
+					  </td>
+					<% if (currentUser){ %>  
+					  <td>
+						<form action="/pros/<%=pro.url_name%>/prodiscs/<%=proDisc._id%>?_method=DELETE" method="POST">
+							<button class="btn btn-sm btn-danger">Delete</button>
+						</form>
+					  </td>
+					<% } %> 	
+					</tr>
+				<% }) %>
+			  </tbody>
+			</table>
+			<% if (currentUser){ %>  
+				<a href="/pros/<%=pro.url_name%>/prodiscs/new" class="btn btn-primary">+ Add a disc to this pro's profile</a>
+			<% } %>
+		</div>
+	</div>
+</div>

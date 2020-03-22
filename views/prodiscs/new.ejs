@@ -1,0 +1,39 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+
+		<h1 style="text-align: center; padding-top: 50px">
+			Add new disc to <%=pro.name%>'s bag
+		</h1>
+
+		<div style="width:30%; margin: 30px auto;">
+			<form action="/pros/<%=pro.url_name%>/prodiscs" method="POST">
+				<div class="form-group">
+					<label for="disc-select">Choose a disc:</label>
+					
+					<select name="disc_id" id="disc-select">
+						<% discs.sort((a, b) => (a.mold > b.mold) ? 1 : -1) %>
+						<% discs.forEach(function(disc){ %>
+							<option value="<%=disc._id%>"><%=disc.mold%></option>
+						<% }) %>
+					</select>
+				</div>				
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="plastic" name="plastic">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="number" placeholder="weight in grams" name="weight">
+				</div>			
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="buy url" name="buy_url">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">
+					Add
+					</button>
+				</div>
+			</form>
+		</div>
+</div>
+
+<%- include("../partials/footer") %>

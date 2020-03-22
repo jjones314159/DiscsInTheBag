@@ -1,0 +1,50 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+
+		<h1 style="text-align: center; padding-top: 50px">
+			Add new disc
+		</h1>
+		<div style="width:30%; margin: 30px auto;">
+			<form action="/discs" method="POST">
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="mold" name="mold">
+				</div>				
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="brand" name="brand">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="image url" name="image">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="category e.g., Distance Driver" name="category">
+				</div>				
+				<div class="form-group">
+					<input class="form-control" type="number" placeholder="speed" name="speed">
+				</div>	
+				<div class="form-group">
+					<input class="form-control" type="number" placeholder="glide" name="glide">
+				</div>	
+				<div class="form-group">
+					<input class="form-control" type="number" placeholder="turn" name="turn">
+				</div>					
+				<div class="form-group">
+					<input class="form-control" type="number" placeholder="fade" name="fade">
+				</div>				
+				<div class="form-group">
+					<input class="form-control" type="number" placeholder="popularity score" name="popularity_score">
+				</div>				
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="buy url" name="buy_url">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-primary btn-block">
+					Create
+					</button>
+				</div>
+			</form>
+		</div>
+
+</div>
+
+<%- include("../partials/footer") %>
