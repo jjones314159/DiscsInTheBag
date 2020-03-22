@@ -12,11 +12,13 @@ var express 		= require("express"),
 	Admin			= require("./models/admin");
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
+//mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://admin:Cf6ibPTGKtpAHvK3@cluster0-uywm1.mongodb.net/discsinthebag?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true});
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+
 
 // PASSPORT CONFIG
 app.use(require("express-session")({
@@ -374,3 +376,6 @@ async function updateAllPopScores(){
 
 // RUN SERVER
 app.listen(process.env.PORT, process.env.IP);
+// app.listen(3000, function() {
+// 	console.log("Discsinthebag server is running...")
+// })
