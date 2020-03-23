@@ -260,7 +260,7 @@ app.put("/discs/:mold", isLoggedIn, function(req, res) {
 		if (err) {
 			res.redirect("/discs");
 		}
-		res.redirect("/discs/" + req.params.mold)
+		res.redirect("/discs")
 	})
 })
 
