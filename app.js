@@ -12,7 +12,7 @@ var express 		= require("express"),
 	Admin			= require("./models/admin");
 
 // APP CONFIG
-//mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect("mongodb+srv://admin:Cf6ibPTGKtpAHvK3@cluster0-uywm1.mongodb.net/discsinthebag?retryWrites=true&w=majority", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
 }).then(() => {
 		console.log("Database connected!");
