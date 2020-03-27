@@ -373,7 +373,7 @@ async function updateAllPopScores(){
 					pro.pro_discs.forEach(function(proDisc){
 						//check if current proDisc is already in array of molds already counted
 						console.log(molds.some(proDisc));
-						if(!molds.some(proDisc){
+						if(!molds.some(proDisc)){
 						   	proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
 							proDisc.disc.id.save();
 
