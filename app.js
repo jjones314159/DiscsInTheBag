@@ -366,10 +366,20 @@ async function updateAllPopScores(){
 			} else {
 				//for each pro, find all pro discs
 				foundPros.forEach(function(pro){
+					// set up empty array to track molds
+					var molds = [];
+					
 					// for each prodisc, find the disc and add a number to its pop score based on pro ranking
 					pro.pro_discs.forEach(function(proDisc){
-						proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
-						proDisc.disc.id.save();
+						//check if current proDisc is already in array of molds already counted
+						console.log(molds.some(proDisc));
+						if(!molds.some(proDisc){
+						   	proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
+							proDisc.disc.id.save();
+
+							//add mold to array of molds already added
+							molds.push(proDisc.disc.id.mold);
+						}
 					})			  
 				})
 			}
