@@ -390,10 +390,10 @@ async function updateAllPopScores(){
 	}
 }
 
-// RUN SERVER
-// app.listen(process.env.PORT, () => {
-//     console.log("Our app is running");
-// });
-app.listen(3000, function() {
-	console.log("Discsinthebag server is running...")
-})
+// RUN SERVER - first version is for heroku, second version is for goorm
+app.listen(process.env.PORT, () => {
+    console.log("Our app is running");
+});
+// app.listen(3000, function() {
+// 	console.log("Discsinthebag server is running...")
+// })
