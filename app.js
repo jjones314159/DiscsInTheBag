@@ -372,13 +372,14 @@ async function updateAllPopScores(){
 					// for each prodisc, find the disc and add a number to its pop score based on pro ranking
 					pro.pro_discs.forEach(function(proDisc){
 						//check if current proDisc is already in array of molds already counted
-						console.log(molds.some(proDisc));
-						if(!molds.some(proDisc)){
+						console.log(molds.includes(proDisc.disc.id.mold));
+						if(!molds.includes(proDisc.disc.id.mold)){
 						   	proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
 							proDisc.disc.id.save();
 
 							//add mold to array of molds already added
 							molds.push(proDisc.disc.id.mold);
+							console.log(molds);
 						}
 					})			  
 				})
@@ -390,9 +391,9 @@ async function updateAllPopScores(){
 }
 
 // RUN SERVER
-app.listen(process.env.PORT, () => {
-    console.log("Our app is running");
-});
-// app.listen(3000, function() {
-// 	console.log("Discsinthebag server is running...")
-// })
+// app.listen(process.env.PORT, () => {
+//     console.log("Our app is running");
+// });
+app.listen(3000, function() {
+	console.log("Discsinthebag server is running...")
+})
