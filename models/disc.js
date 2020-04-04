@@ -10,6 +10,7 @@ var discSchema = mongoose.Schema({
 	turn: Number,
 	fade: Number,
 	popularity_score: Number,
+	popularity_rank: Number,
 	buy_url: String
 })
 

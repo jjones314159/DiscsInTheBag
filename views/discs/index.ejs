@@ -10,7 +10,7 @@
 		<div class="col-md col-sm-12">
 			<div class="sort-controls mr-4">
 				<span id="sort" class="pr-2">Sort by</span>
-				<button type="button" class="mixitup-control control btn-sm" id="control1" data-sort="default:asc">Popularity Score</button>
+				<button type="button" class="mixitup-control control btn-sm" id="control1" data-sort="default:asc">Popularity Rank</button>
 				<button type="button" class="mixitup-control control btn-sm" id="control2" data-sort="alphabet:asc">A-Z</button>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 	</div>
 	
 	<div class="row text-center discs-index-container mt-5">
-		<% discs.sort((a, b) => (a.popularity_score < b.popularity_score) ? 1 : -1) %>
+		<% discs.sort((a, b) => (a.popularity_rank > b.popularity_rank) ? 1 : -1) %>
 		<% discs.forEach(function(disc){ %>
 			<div class="col-md-3 col-sm-6 disc-card mix <%=disc.brand%> <%=disc.category.substring(0, 4)%>" data-alphabet="<%=disc.mold%>">
 				<a href="/discs/<%=disc.mold%>">

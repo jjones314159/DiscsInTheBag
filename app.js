@@ -9,7 +9,9 @@ var express 		= require("express"),
 	Pro 			= require("./models/pro"),
 	ProDisc 		= require("./models/prodisc"),
 	Disc			= require("./models/disc"),
-	Admin			= require("./models/admin");
+	Admin			= require("./models/admin"),
+	helper 			= require('./public/scripts/helper');
+;
 
 // APP CONFIG
 // mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
@@ -189,6 +191,7 @@ app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, function(req,res) {
 // Disc Index Route
 app.get("/discs", function(req, res){
 	updateAllPopScores();
+	updateAllPopRanks();
 	//get all discs
 	Disc.find({}, function(err, allDiscs){
 		if(err){
@@ -216,7 +219,7 @@ app.get("/discs/:mold", function(req, res){
 			// find pros
 			Pro.find({}).populate({path : 'pro_discs', populate : {path : 'disc.id'}}).exec(function(err, allPros){				
 				// render show page and pass through pros and disc
-				res.render("discs/show", {disc: foundDisc, pros: allPros});
+				res.render("discs/show", {disc: foundDisc, pros: allPros, helper: helper});
 			})
 		}
 	})
@@ -386,6 +389,23 @@ async function updateAllPopScores(){
 	} catch (err) {
 		console.log(err);
 	}
+}
+
+function updateAllPopRanks(){
+	Disc.find({}, function(err, allDiscs){
+		if(err){
+			console.log(err);
+		} else {
+			//sort discs by pop score 
+			allDiscs.sort((a, b) => (a.popularity_score < b.popularity_score) ? 1 : -1)
+
+			//loop through discs and assign pop ranks
+			for (i = 0; i < allDiscs.length; i++) {
+				allDiscs[i].popularity_rank = i+1;
+				allDiscs[i].save();
+			}
+		}
+	})
 }
 
 // RUN SERVER - first version is for heroku, second version is for goorm

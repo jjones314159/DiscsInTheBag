@@ -12,7 +12,7 @@
 		<p><span class="disc-text pr-1">Brand: </span><%=disc.brand%></p>
 		<p><span class="disc-text pr-1">Category: </span><%=disc.category%></p>
 		<p><span class="disc-text pr-1">Flight numbers: </span><%=disc.speed%> | <%=disc.glide%> | <%=disc.turn%> | <%=disc.fade%></p>
-		<p><span class="disc-text pr-1">Popularity Score: </span><%=disc.popularity_score%></p>
+		<p><span class="disc-text pr-1">Popularity Rank: </span><%= helper.ordinal_suffix_of(disc.popularity_rank) %></p>
 	</div>
 
 	<div class="wrapper">
