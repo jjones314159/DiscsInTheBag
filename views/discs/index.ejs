@@ -5,16 +5,61 @@
 	<header class="jumbotron text-center p-1 align-middle">
 		Welcome! Select a disc below to see more info and the pros who use it.
 	</header>
+	
+	<div class="row">
+		<div class="col-md col-sm-12">
+			<div class="sort-controls mr-4">
+				<span id="sort" class="pr-2">Sort by</span>
+				<button type="button" class="mixitup-control control btn-sm" id="control1" data-sort="default:asc">Popularity Score</button>
+				<button type="button" class="mixitup-control control btn-sm" id="control2" data-sort="alphabet:asc">A-Z</button>
+			</div>
+		</div>
 
-	<div class="row text-center">
+		<div class="col-md col-sm-12 mt-sm-2 mt-md-0">
+			<div class="filter-controls">
+				<span class="pr-2">Filter by</span>
+				<div class="dropdown inline-filter">
+					<button class="btn-sm btn-info dropdown-toggle brand-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Brand
+					</button>
+					<div class="dropdown-menu brand-dropdown">
+						<button type="button" class="dropdown-item" value="All">All</button>
+						<button type="button" class="dropdown-item" value="Discmania">Discmania</button>
+						<button type="button" class="dropdown-item" value="Discraft">Discraft</button>
+						<button type="button" class="dropdown-item" value="Dynamic">Dynamic Discs</button>
+						<button type="button" class="dropdown-item" value="Innova">Innova</button>
+						<button type="button" class="dropdown-item" value="Latitude">Latitude 64</button>
+						<button type="button" class="dropdown-item" value="Prodigy">Prodigy</button>
+						<button type="button" class="dropdown-item" value="Westside">Westside</button>
+					</div>
+				</div>
+
+				<div class="dropdown inline-filter">
+					<button class="btn-sm btn-warning dropdown-toggle category-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Category
+					</button>
+					<div class="dropdown-menu category-dropdown">
+						<button type="button" class="dropdown-item" value="All">All</button>
+						<button type="button" class="dropdown-item" value="Dist">Distance Drivers</button>	
+						<button type="button" class="dropdown-item" value="Fair">Fairway Drivers</button>
+						<button type="button" class="dropdown-item" value="Midr">Midranges</button>
+						<button type="button" class="dropdown-item" value="Putt">Putters</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row text-center discs-index-container mt-5">
 		<% discs.sort((a, b) => (a.popularity_score < b.popularity_score) ? 1 : -1) %>
 		<% discs.forEach(function(disc){ %>
-			<div class="col-md-3 col-sm-6 pro-card">
+			<div class="col-md-3 col-sm-6 disc-card mix <%=disc.brand%> <%=disc.category.substring(0, 4)%>" data-alphabet="<%=disc.mold%>">
 				<a href="/discs/<%=disc.mold%>">
 					<div class="card mb-md-4 mb-2">
 						<img src=<%=disc.image%> class="card-img-top">
 						<div class="card-body">
 							<h5 class="card-title"><%=disc.mold%></h5>
+							<h5 class="card-subtitle"><%=disc.brand%></h5>
 						</div>
 					</div>
 				</a>

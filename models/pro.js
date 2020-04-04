@@ -4,6 +4,7 @@ var proSchema = mongoose.Schema({
 	name: String,
 	url_name: String,
 	image: String,
+	image_credit: String,
 	rank: Number,
 	gender: String,
 	sponsor: String,

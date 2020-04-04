@@ -6,19 +6,20 @@
 	</p>
 	<div class="float-left pr-5">
 		<img src=<%=pro.image%> class="profile-image">
+		<span class="image-credit">image credit: <%=pro.image_credit%></span>
 	</div>
 	<div class="float-left">
-		<h2 class="profile-name"><%=pro.name%></h2>
-		<p>Rank: <%=pro.rank%></p>
-		<p>Sponsor: <%=pro.sponsor%></p>
-		<p>Last bag update: <%=pro.last_bag_update%></p>
+		<h2 class="profile-name pb-2"><%=pro.name%></h2>
+		<p><span class="pro-text pr-1">Rank: </span><%=pro.rank%></p>
+		<p><span class="pro-text pr-1">Sponsor: </span><%=pro.sponsor%></p>
+		<p><span class="pro-text pr-1">Last bag update: </span><%=pro.last_bag_update%></p>
 	</div>
 	<!-- <div class="profile-disc-category float-left mt-5">
 		Distance Drivers
 	</div> -->
 	<div class="wrapper">
 		<div>
-			<table class="table">
+			<table class="table-sm">
 			  <thead>
 				<tr>
 				  <th scope="col">Category</th>
@@ -32,14 +33,18 @@
 				<% pro.pro_discs.sort((a, b) => (a.disc.id.category > b.disc.id.category) ? 1 : (a.disc.id.category === b.disc.id.category) ? ((a.disc.id.mold > b.disc.id.mold) ? 1 : -1) : -1 ) %>
 				<% pro.pro_discs.forEach(function(proDisc){ %>
 					<tr>
-					  <td><%=proDisc.disc.id.category%></td>
-					  <td><a href="/discs/<%=proDisc.disc.id.mold%>"><%=proDisc.disc.id.mold%></a></td>
-					  <td><%=proDisc.disc.id.brand%></td>
-					  <td><%=proDisc.plastic%></td>
-					  <td><%=proDisc.weight%>g</td>
-					  <td>
-						  	<a href="<%=proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-info">Buy <i class="fas fa-external-link-alt"></i></a>
-					  </td>
+					  <td class="cell"><%=proDisc.disc.id.category%></td>
+					  <td class="cell"><a href="/discs/<%=proDisc.disc.id.mold%>"><%=proDisc.disc.id.mold%></a></td>
+					  <td class="cell"><%=proDisc.disc.id.brand%></td>
+					  <td class="cell"><%=proDisc.plastic%></td>
+					  <% if (proDisc.weight){ %>  
+						<td class="cell"><%=proDisc.weight%>g</td>
+					  <% } else { %>
+					  	<td class="unknown cell">unknown</td>
+					  <% } %>
+					  <!-- <td>
+						  	<a href="<%=//proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-light">Buy <i class="fas fa-external-link-alt"></i></a>
+					  </td> -->
 					<% if (currentUser){ %>  
 					  <td>
 						<form action="/pros/<%=pro.url_name%>/prodiscs/<%=proDisc._id%>?_method=DELETE" method="POST">
@@ -57,3 +62,5 @@
 		</div>
 	</div>
 </div>
+
+<%- include("../partials/footer") %>

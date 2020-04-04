@@ -207,7 +207,7 @@ app.get("/discs/new", isLoggedIn, function(req,res) {
 // Disc Show Route
 app.get("/discs/:mold", function(req, res){
 	
-	updateAllPopScores();
+	//updateAllPopScores();
 
 	Disc.findOne({mold: req.params.mold}, function(err, foundDisc){
 		if (err) {
@@ -352,10 +352,10 @@ async function updateAllPopScores(){
 			if(err){
 				console.log(err);
 			} else {
-				allDiscs.forEach(function(disc){
-					disc.popularity_score = 0;
-					disc.save();
-				})
+				for (i = 0; i < allDiscs.length; i++) {
+					allDiscs[i].popularity_score = 0;
+					allDiscs[i].save();
+				}
 			}
 		})
 		
@@ -364,22 +364,20 @@ async function updateAllPopScores(){
 			if(err){
 				console.log(err);
 			} else {
-				//for each pro, find all pro discs
+				//for each pro, find all pro discs				
 				foundPros.forEach(function(pro){
-					// set up empty array to track molds
+					// set up empty array to track molds so as not to double count them toward pop score
 					var molds = [];
 					
 					// for each prodisc, find the disc and add a number to its pop score based on pro ranking
 					pro.pro_discs.forEach(function(proDisc){
 						//check if current proDisc is already in array of molds already counted
-						console.log(molds.includes(proDisc.disc.id.mold));
 						if(!molds.includes(proDisc.disc.id.mold)){
 						   	proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
 							proDisc.disc.id.save();
 
 							//add mold to array of molds already added
 							molds.push(proDisc.disc.id.mold);
-							console.log(molds);
 						}
 					})			  
 				})
