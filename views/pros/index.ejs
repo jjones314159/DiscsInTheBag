@@ -5,11 +5,20 @@
 	<header class="jumbotron text-center p-1 align-middle">
 		Welcome! Select a pro below to see the discs in their bag.
 	</header>
-
-	<div class="row text-center">
+	
+	<div class="row justify-content-center mb-4">
+		<div>
+			<div class="sort-controls">
+				<button type="button" class="mixitup-control control btn-sm" id="control3" data-filter=".gender-m">MPO</button>
+				<button type="button" class="mixitup-control control btn-sm" id="control4" data-filter=".gender-f">FPO</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row text-center pros-index-container">
 		<% pros.sort((a, b) => (a.rank > b.rank) ? 1 : -1) %>
 		<% pros.forEach(function(pro){ %>
-			<div class="col-md-3 col-sm-6 pro-card">
+			<div class="col-md-3 col-sm-6 pro-card mix gender-<%=pro.gender%>">
 				<a href="/pros/<%=pro.url_name%>">
 					<div class="card mb-md-4 mb-2">
 						<img src=<%=pro.image%> class="card-img-top">

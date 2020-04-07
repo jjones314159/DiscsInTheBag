@@ -9,6 +9,7 @@ var proSchema = mongoose.Schema({
 	gender: String,
 	sponsor: String,
 	last_bag_update: String,
+	inthebag_url: String,
 	pro_discs: [
       {
          type: mongoose.Schema.Types.ObjectId,

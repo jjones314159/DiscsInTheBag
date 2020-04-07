@@ -5,8 +5,26 @@ if(!filterString){
 	}
 }
 
+// enable tooltips on disc show page
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// pro filtering by gender
+if (document.querySelector('.pros-index-container')){
+	var prosContainer = document.querySelector('.pros-index-container');
+
+	var mixer = mixitup(prosContainer, {
+		selectors: {
+			control: '.mixitup-control'
+	}});
+	
+	// set men to default selection
+	$('button#control3').click();
+}
 
 
+// disc sorting and filtering
 if (document.querySelector('.discs-index-container')){
 	var discsContainer = document.querySelector('.discs-index-container');
 

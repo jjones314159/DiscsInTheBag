@@ -26,11 +26,25 @@
     color: darkorange;
 }
 
+.fa-youtube {
+	color: #c4302b;
+}
+
+.fa-youtube:hover {
+	color: darkred;
+}
+
 .disc-text {
 	text-transform: uppercase;
     font-size: .9rem;
     font-weight: 700;
     color: midnightblue;
+}
+
+.pop-rank {
+	text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: gray;
 }
 
 .wrapper {
@@ -172,6 +186,21 @@ button:focus {
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
 }
+
+#control3 {
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+	border-top-right-radius: 0rem;
+	border-bottom-right-radius: 0rem;
+}
+
+#control4 {
+	border-top-left-radius: 0rem;
+	border-bottom-left-radius: 0rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+
 
 /* 
 .control:hover {
