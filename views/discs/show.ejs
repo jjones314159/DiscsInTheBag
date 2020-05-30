@@ -33,6 +33,7 @@
 			  </thead>
 			  <tbody>
 				  <!-- for each pro see if they have any prodiscs matching the disc -->
+				<% pros.sort((a, b) => (a.rank > b.rank) ? 1 : -1) %>
 				<% pros.forEach(function(pro){ %>
 				  	<% pro.pro_discs.forEach(function(proDisc){ %>
 						<% if(proDisc.disc.id._id == disc.id){ %>
@@ -44,7 +45,7 @@
 					  		  <% } else { %>
 					  			<td class="unknown cell">unknown</td>
 					  		  <% } %>
-							  <!-- <td><a href="<%=//proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-light">Buy <i class="fas fa-external-link-alt"></i></a></td> -->
+							  <td><a href="<%=proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-light">Buy <i class="fas fa-external-link-alt"></i></a></td>
 							</tr>
 				  		<% } %>
 				  	<% }) %>

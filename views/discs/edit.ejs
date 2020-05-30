@@ -26,10 +26,10 @@
 					Glide <input class="form-control" type="number" value="<%=disc.glide%>" name="disc[glide]">
 				</div>					
 				<div class="form-group">
-					Turn <input class="form-control" type="number" value="<%=disc.turn%>" name="disc[turn]">
+					Turn <input class="form-control" type="number" value="<%=disc.turn%>" name="disc[turn]" step="0.5">
 				</div>					
 				<div class="form-group">
-					Fade <input class="form-control" type="number" value="<%=disc.fade%>" name="disc[fade]">
+					Fade <input class="form-control" type="number" value="<%=disc.fade%>" name="disc[fade]" step="0.5">
 				</div>				
 				<div class="form-group">
 					Popularity Score <input class="form-control" type="number" value="<%=disc.popularity_score%>" name="disc[popularity_score]">
@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group">
 					<button class="btn btn-lg btn-primary btn-block">
-					Submit
+					Save
 					</button>
 				</div>
 			</form>

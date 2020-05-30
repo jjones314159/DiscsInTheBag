@@ -42,9 +42,9 @@
 					  <% } else { %>
 					  	<td class="unknown cell">unknown</td>
 					  <% } %>
-					  <!-- <td>
-						  	<a href="<%=//proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-light">Buy <i class="fas fa-external-link-alt"></i></a>
-					  </td> -->
+					  <td>
+						  	<a href="<%=proDisc.buy_url%>" target="_blank" class="btn btn-sm btn-light">Buy <i class="fas fa-external-link-alt"></i></a>
+					  </td>
 					<% if (currentUser){ %>  
 					  <td>
 						<form action="/pros/<%=pro.url_name%>/prodiscs/<%=proDisc._id%>?_method=DELETE" method="POST">

@@ -17,4 +17,24 @@ helper.ordinal_suffix_of = function(i) {
     return i + "th";
 }
 
+// categorizes stability for discs index stability filter
+helper.categorizeStability = function(disc) {
+	var stability = disc.turn + disc.fade;
+	if (stability > 1) {
+		return "Overstable";
+	}	
+	if (stability == 0 || (stability > -1 && stability < 1)) {
+		return "Stable";
+	}
+	if (stability == -1) {
+		return "Stable Understable";
+	}	
+	if (stability == 1) {
+		return "Stable Overstable";
+	}	
+	if (stability < -1) {
+		return "Understable";
+	}
+}
+
 module.exports = helper;

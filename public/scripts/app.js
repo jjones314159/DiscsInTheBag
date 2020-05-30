@@ -17,10 +17,14 @@ if (document.querySelector('.pros-index-container')){
 	var mixer = mixitup(prosContainer, {
 		selectors: {
 			control: '.mixitup-control'
-	}});
+		},
+		load: {
+        filter: '.gender-m'
+    	}
+	});
 	
 	// set men to default selection
-	$('button#control3').click();
+	// $('button#control3').click();
 }
 
 
@@ -31,7 +35,8 @@ if (document.querySelector('.discs-index-container')){
 	var mixer = mixitup(discsContainer, {
 		selectors: {
 			control: '.mixitup-control'
-	}});
+		}
+	});
 
 	// brand dropdown menu for filter controls on discs show page
 	 $(function(){
@@ -65,18 +70,36 @@ if (document.querySelector('.discs-index-container')){
 	   });
 	});
 	
+	// stability dropdown menu for filter controls on discs show page
+	 $(function(){
+
+		$(".stability-dropdown button").click(function(){
+
+		  // set text and value of button to selection
+		  $(".stability-filter:first-child").text($(this).text());
+		  $(".stability-filter:first-child").val($(this).text());
+			
+		  // update filter string with the value of the pressed button
+		  filterString.stability_filter = this.value;
+		  filterDiscs();
+		  updateSessionStorage();
+	   });
+	});
+	
 	// set filters on load to whatever the person was using
 	$(function(){
 		var str1 = "[value='" + sessionStorage.getItem('brandFilter') + "']";
 		var str2 = "[value='" + sessionStorage.getItem('categoryFilter') + "']";
+		var str3 = "[value='" + sessionStorage.getItem('stabilityFilter') + "']";
 		$('div.brand-dropdown button').filter(str1).click();
 		$('div.category-dropdown button').filter(str2).click();	
+		$('div.stability-dropdown button').filter(str3).click();	
 	})
 	
 }
 
 
-// Nav bar active link mgmt
+// Nav bar active link mgmt & card hover fx
 $(document).ready(function() {
   
 	// nav bar active link
@@ -100,9 +123,6 @@ $(document).ready(function() {
 		$(this).find('div h5.card-title').removeClass('disc-hover');
 	  }
 	);
-	
-
-  
 });
 
 function filterDiscs() {
@@ -132,6 +152,16 @@ function filterDiscs() {
 				disc.classList.add('hidden');
 			}
 		})
+	}	
+	
+	// hide discs based on stability filter	
+	var stabilityFilterString = filterString.stability_filter;
+	if (stabilityFilterString != "All") {
+		allDiscs.forEach(function (disc){
+			if (!disc.classList.contains(stabilityFilterString)){
+				disc.classList.add('hidden');
+			}
+		})
 	}
 }
 
@@ -139,6 +169,7 @@ function filterDiscs() {
 function updateSessionStorage(){
 	sessionStorage.setItem("brandFilter",filterString.brand_filter);
 	sessionStorage.setItem("categoryFilter",filterString.category_filter);
+	sessionStorage.setItem("stabilityFilter",filterString.stability_filter);
 }
 
 

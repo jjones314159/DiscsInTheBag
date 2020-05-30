@@ -100,12 +100,14 @@ app.post("/pros", isLoggedIn, function(req, res) {
 	var name = req.body.name;
 	var url_name = req.body.url_name;
 	var image = req.body.image;
+	var image_credit = req.body.image_credit;
 	var rank = req.body.rank;
 	var gender = req.body.gender;
 	var sponsor = req.body.sponsor;
 	var last_bag_update = req.body.last_bag_update;
+	var inthebag_url = req.body.inthebag_url;
 
-	var newPro = {name: name, url_name: url_name, image: image, rank: rank, gender: gender, sponsor: sponsor, last_bag_update: last_bag_update};
+	var newPro = {name: name, url_name: url_name, image: image, image_credit: image_credit, rank: rank, gender: gender, sponsor: sponsor, last_bag_update: last_bag_update, inthebag_url: inthebag_url};
 	
 	Pro.create(newPro, function(err, pro){
 		if(err) {
@@ -128,6 +130,8 @@ app.put("/pros/:url_name", isLoggedIn, function(req, res) {
 		if (err) {
 			res.redirect("/pros");
 		}
+		updateAllPopScores();
+		updateAllPopRanks();
 		res.redirect("/pros/" + req.params.url_name)
 	})
 })
@@ -135,7 +139,8 @@ app.put("/pros/:url_name", isLoggedIn, function(req, res) {
 //============
 // PRO DISC ROUTES
 //============
-// Prodisc new & create routes - accessible from pro show page
+
+// Prodisc new routes - show new form
 app.get("/pros/:url_name/prodiscs/new", isLoggedIn, function(req,res) {
 	Pro.findOne({url_name: req.params.url_name}, function(err, foundPro){
 		Disc.find({}, function(err, foundDiscs){
@@ -144,6 +149,7 @@ app.get("/pros/:url_name/prodiscs/new", isLoggedIn, function(req,res) {
 	})
 })
 
+// Prodisc create route - create new prodisc
 app.post("/pros/:url_name/prodiscs", isLoggedIn, function(req, res){
 	var plastic = req.body.plastic;
 	var weight = req.body.weight;
@@ -165,8 +171,20 @@ app.post("/pros/:url_name/prodiscs", isLoggedIn, function(req, res){
 						if(err){
 							console.log(err);
 						} else {
+							// add prodisc to pro's bag
 							foundPro.pro_discs.push(newlyCreated);
 							foundPro.save();
+							
+							// increment disc popularity score based on pro rank
+							foundDisc.popularity_score += calculatePopScore(foundPro.rank);
+							foundDisc.save(function (err, product, numAffected) {
+								if (err) {
+									console.log(err);
+								} else {
+									updateAllPopRanks();
+								}
+							});
+							
 							res.redirect("/pros/"+req.params.url_name);
 						}
 					});
@@ -178,6 +196,25 @@ app.post("/pros/:url_name/prodiscs", isLoggedIn, function(req, res){
 	
 // Prodisc destroy route
 app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, function(req,res) {
+	// find pro
+	
+	// find disc and update pop score
+	ProDisc.findById(req.params.id, function(err, foundProdisc){
+		Disc.findById(foundProdisc.disc.id, function(err, foundDisc) {		
+			Pro.findOne({url_name: req.params.url_name}, function(err, foundPro) {
+				// decrement disc popularity score based on pro rank
+				foundDisc.popularity_score -= calculatePopScore(foundPro.rank);
+				foundDisc.save(function (err, product, numAffected) {
+					if (err) {
+						console.log(err);
+					} else {
+						updateAllPopRanks();
+				  	}
+				});
+			});
+		});
+	});
+
 	ProDisc.deleteOne({_id: req.params.id}, function(err){
 		res.redirect("/pros/" + req.params.url_name);
 	})
@@ -190,14 +227,14 @@ app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, function(req,res) {
 //============
 // Disc Index Route
 app.get("/discs", function(req, res){
-	updateAllPopScores();
-	updateAllPopRanks();
+	//updateAllPopScores();
+	//updateAllPopRanks();
 	//get all discs
 	Disc.find({}, function(err, allDiscs){
 		if(err){
 			console.log(err);
 		} else {
-			res.render("discs/index", {discs:allDiscs});
+			res.render("discs/index", {discs:allDiscs, helper: helper});
 		}
 	})
 })
@@ -263,7 +300,7 @@ app.put("/discs/:mold", isLoggedIn, function(req, res) {
 		if (err) {
 			res.redirect("/discs");
 		}
-		res.redirect("/discs")
+		res.redirect("/discs");
 	})
 })
 
@@ -284,11 +321,9 @@ app.get("/login", function(req, res){
 })
 
 // HANDLE LOGIN
-app.post("/login", passport.authenticate("local", 
-	{
-		successRedirect: "/pros",
-		failureRedirect: "/login"
-	}), function(req, res){
+app.post("/login", passport.authenticate("local", {failureRedirect: "/login"}), function(req, res) {
+    res.redirect(req.session.returnTo || '/');
+    delete req.session.returnTo;
 })
 
 // HANDLE LOGOUT
@@ -300,9 +335,11 @@ app.get("/logout", function(req, res){
 // LOGIN MIDDLEWARE
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated() && req.user.admin){
-		console.log("there is a logged in admin user")
+		//console.log("there is a logged in admin user")
 		return next();
 	}
+	console.log(req.path);
+	req.session.returnTo = req.path;
 	res.redirect("/login");
 }
 
@@ -348,6 +385,7 @@ function calculatePopScore(proRank) {
 	return popScore;
 }
 
+// only used when pro profiles are updated, which can include a potential rank change
 async function updateAllPopScores(){
 	try {
 		//reset disc popularity scores
@@ -409,9 +447,9 @@ function updateAllPopRanks(){
 }
 
 // RUN SERVER - first version is for heroku, second version is for goorm
-app.listen(process.env.PORT, () => {
-    console.log("Our app is running");
-});
-// app.listen(3000, function() {
-// 	console.log("Discsinthebag server is running...")
-// })
+// app.listen(process.env.PORT, () => {
+//     console.log("Our app is running");
+// });
+app.listen(3000, function() {
+	console.log("Discsinthebag server is running...")
+})

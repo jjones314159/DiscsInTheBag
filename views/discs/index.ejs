@@ -19,31 +19,46 @@
 			<div class="filter-controls">
 				<span class="pr-2">Filter by</span>
 				<div class="dropdown inline-filter">
-					<button class="btn-sm btn-info dropdown-toggle brand-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Brand
+					<button class="btn-sm dropdown-toggle brand-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						All Brands
 					</button>
 					<div class="dropdown-menu brand-dropdown">
-						<button type="button" class="dropdown-item" value="All">All</button>
+						<button type="button" class="dropdown-item" value="All">All Brands</button>
+						<button type="button" class="dropdown-item" value="Axiom">Axiom</button>
 						<button type="button" class="dropdown-item" value="Discmania">Discmania</button>
 						<button type="button" class="dropdown-item" value="Discraft">Discraft</button>
 						<button type="button" class="dropdown-item" value="Dynamic">Dynamic Discs</button>
 						<button type="button" class="dropdown-item" value="Innova">Innova</button>
 						<button type="button" class="dropdown-item" value="Latitude">Latitude 64</button>
+						<button type="button" class="dropdown-item" value="MVP">MVP</button>
 						<button type="button" class="dropdown-item" value="Prodigy">Prodigy</button>
+						<button type="button" class="dropdown-item" value="Streamline">Streamline</button>
 						<button type="button" class="dropdown-item" value="Westside">Westside</button>
 					</div>
 				</div>
 
 				<div class="dropdown inline-filter">
-					<button class="btn-sm btn-warning dropdown-toggle category-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Category
+					<button class="btn-sm dropdown-toggle category-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						All Types
 					</button>
 					<div class="dropdown-menu category-dropdown">
-						<button type="button" class="dropdown-item" value="All">All</button>
+						<button type="button" class="dropdown-item" value="All">All Types</button>
 						<button type="button" class="dropdown-item" value="Dist">Distance Drivers</button>	
 						<button type="button" class="dropdown-item" value="Fair">Fairway Drivers</button>
 						<button type="button" class="dropdown-item" value="Midr">Midranges</button>
 						<button type="button" class="dropdown-item" value="Putt">Putters</button>
+					</div>
+				</div>
+				
+				<div class="dropdown inline-filter">
+					<button class="btn-sm dropdown-toggle stability-filter" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						All Stabilities
+					</button>
+					<div class="dropdown-menu stability-dropdown">
+						<button type="button" class="dropdown-item" value="All">All Stabilities</button>
+						<button type="button" class="dropdown-item" value="Overstable">Overstable</button>	
+						<button type="button" class="dropdown-item" value="Stable">Stable</button>
+						<button type="button" class="dropdown-item" value="Understable">Understable</button>
 					</div>
 				</div>
 			</div>
@@ -53,7 +68,7 @@
 	<div class="row text-center discs-index-container mt-5">
 		<% discs.sort((a, b) => (a.popularity_rank > b.popularity_rank) ? 1 : -1) %>
 		<% discs.forEach(function(disc){ %>
-			<div class="col-md-3 col-sm-6 disc-card mix <%=disc.brand%> <%=disc.category.substring(0, 4)%>" data-alphabet="<%=disc.mold%>">
+			<div class="col-md-3 col-sm-6 disc-card mix <%=disc.brand%> <%=disc.category.substring(0, 4)%> <%=helper.categorizeStability(disc)%>" data-alphabet="<%=disc.mold%>">
 				<a href="/discs/<%=disc.mold%>">
 					<div class="card mb-md-4 mb-2">
 						<img src=<%=disc.image%> class="card-img-top">

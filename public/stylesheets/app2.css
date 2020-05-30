@@ -2,6 +2,10 @@
 	text-align: right;
 }
 
+.jumbotron {
+	background-color: #dded85;
+}
+
 .profile-image {
 	width: 250px;
 	border-radius: 10px;
@@ -23,7 +27,7 @@
 	text-transform: uppercase;
     font-size: .9rem;
     font-weight: 700;
-    color: darkorange;
+    color: #6fa658;
 }
 
 .fa-youtube {
@@ -38,7 +42,7 @@
 	text-transform: uppercase;
     font-size: .9rem;
     font-weight: 700;
-    color: midnightblue;
+    color: #6fa658;
 }
 
 .pop-rank {
@@ -58,6 +62,14 @@
 
 .discs-index-container .card {
 	border: none;
+}
+
+a {
+	color: #176663;
+}
+
+a:hover {
+	color: darkgray;
 }
 
 .pro-card a {
@@ -108,7 +120,7 @@ td.cell {
 }
 
 footer {
-	background-color: #757575;
+	background-color: #176663;
 	color: white;
 	margin-top: 10rem;
 }
@@ -129,6 +141,22 @@ footer a {
 
 /* Controls, Sorting, Filter
 ---------------------------------------------------------------------- */
+.brand-filter {
+	background-color: #176663;
+	color: white;
+}
+
+.category-filter {
+	background-color: #176663;
+	color: white;
+
+}
+
+.stability-filter {
+	background-color: #176663;
+	color: white;
+}
+
 .inline-filter {
 	display: inline;
 }
@@ -158,9 +186,10 @@ footer a {
 }
 
 .sort-controls .mixitup-control-active {
-    background: lightblue;
+    background: #6fa658;
 	font-weight: 600;
-	border: 1px solid black;
+	border: 2px solid #dded85;
+	color: white;
 }
 
 button:focus {
@@ -178,6 +207,8 @@ button:focus {
 	border-bottom-left-radius: 0.5rem;
 	border-top-right-radius: 0rem;
 	border-bottom-right-radius: 0rem;
+	border: 1px solid #dded85;
+
 }
 
 #control2 {
@@ -185,6 +216,7 @@ button:focus {
 	border-bottom-left-radius: 0rem;
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
+	border: 1px solid #dded85;
 }
 
 #control3 {
@@ -192,6 +224,7 @@ button:focus {
 	border-bottom-left-radius: 0.5rem;
 	border-top-right-radius: 0rem;
 	border-bottom-right-radius: 0rem;
+	border: 1px solid #dded85;
 }
 
 #control4 {
@@ -199,6 +232,7 @@ button:focus {
 	border-bottom-left-radius: 0rem;
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
+	border: 1px solid #dded85;
 }
 
 
