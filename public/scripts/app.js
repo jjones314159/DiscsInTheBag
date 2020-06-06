@@ -1,7 +1,8 @@
 if(!filterString){
 	var filterString = {
 	brand_filter: "All",
-	category_filter: "All"
+	category_filter: "All",
+	stability_filter: "All"
 	}
 }
 
