@@ -13,7 +13,6 @@
 
 .profile-name {
 	font-size: 3rem;
-	margin-top: 2.5rem;
 }
 
 .image-credit {
@@ -25,9 +24,14 @@
 
 .pro-text {
 	text-transform: uppercase;
-    font-size: .9rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: 500;
     color: #6fa658;
+}
+
+.pro-text-entry {
+    font-size: 1.75rem;
+    font-weight: 500;
 }
 
 .fa-youtube {
