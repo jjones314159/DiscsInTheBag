@@ -173,6 +173,7 @@ footer a {
 .brand-filter {
 	background-color: #176663;
 	color: white;
+	font-size: 2rem;
 }
 
 .category-filter {
@@ -190,9 +191,17 @@ footer a {
 	display: inline;
 }
 
+.dropdown-menu {
+	font-size: 2rem;
+}
+
 #sort {
-	font-size: 1rem;
+	font-size: 2rem;
 	color: black;
+}
+
+#filter {
+	font-size: 2rem;
 }
 
 .sort-controls {
@@ -237,7 +246,7 @@ button:focus {
 	border-top-right-radius: 0rem;
 	border-bottom-right-radius: 0rem;
 	border: 1px solid #dded85;
-
+	font-size: 2rem;
 }
 
 #control2 {
@@ -246,6 +255,7 @@ button:focus {
 	border-top-right-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
 	border: 1px solid #dded85;
+	font-size: 2rem;
 }
 
 #control3 {
