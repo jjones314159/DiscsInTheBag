@@ -42,6 +42,14 @@
 	color: darkred;
 }
 
+.category-cell {
+	font-size: 1rem;
+}
+
+td.cell.btn {
+	font-size: inherit;
+}
+
 .disc-text {
 	text-transform: uppercase;
     font-size: .9rem;
@@ -116,6 +124,7 @@ td.unknown {
 
 td.cell {
 	padding-right: 3.25rem;
+	font-size: 2rem;
 }
 
 #about-table {
