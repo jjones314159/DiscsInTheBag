@@ -43,7 +43,7 @@
 }
 
 .category-cell {
-	font-size: 1rem;
+	font-size: 1.5rem;
 }
 
 table a.btn {
@@ -124,6 +124,7 @@ td.unknown {
 
 table {
 	font-size: 2rem;
+	text-align: left;
 }
 
 td.cell {
