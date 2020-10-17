@@ -1,6 +1,6 @@
 <%- include("../partials/header") %>
 
-<div class="container">
+<div class="container-fluid">
 	
 	<header class="jumbotron text-center p-1 align-middle">
 		Welcome! Select a pro below to see the discs in their bag.
@@ -18,7 +18,7 @@
 	<div class="row text-center pros-index-container">
 		<% pros.sort((a, b) => (a.rank > b.rank) ? 1 : -1) %>
 		<% pros.forEach(function(pro){ %>
-			<div class="col-lg-3 col-6 pro-card mix gender-<%=pro.gender%>">
+			<div class="col-lg-3 col-4 pro-card mix gender-<%=pro.gender%>">
 				<a href="/pros/<%=pro.url_name%>">
 					<div class="card mb-md-4 mb-2">
 						<img src=<%=pro.image%> class="card-img-top">
