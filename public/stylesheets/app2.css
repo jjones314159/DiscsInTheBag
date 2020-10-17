@@ -1,8 +1,9 @@
 .nav-item {
 	text-align: right;
+	padding-right: 2rem;
 }
 
-.navbar-brand {
+nav {
 	font-size: 2rem;
 }
 
