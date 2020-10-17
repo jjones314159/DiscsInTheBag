@@ -1,3 +1,7 @@
+.container-fluid {
+	max-width: 960px;
+}
+
 .nav-item {
 	text-align: right;
 	padding-right: 2rem;
