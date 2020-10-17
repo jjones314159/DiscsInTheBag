@@ -2,6 +2,10 @@
 	text-align: right;
 }
 
+.navbar-brand {
+	font-size: 2rem;
+}
+
 .jumbotron {
 	background-color: #dded85;
 }
@@ -67,10 +71,6 @@ table a.btn {
 	clear:both;
 	padding-top: 50px;
 }
-
-/* .navbar {
-	background-color: #90b4d4;
-} */
 
 .discs-index-container .card {
 	border: none;
