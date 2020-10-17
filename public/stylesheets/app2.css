@@ -142,6 +142,10 @@ td.cell {
 	padding-right: 2rem;
 }
 
+.about-page {
+	font-size: 2rem;
+}
+
 #about-table {
 	width: 20%;
 	text-align: center;
@@ -170,7 +174,7 @@ footer a {
 
 /* Controls, Sorting, Filter
 ---------------------------------------------------------------------- */
-.brand-filter, .category-filter, .stability.filter {
+.brand-filter, .category-filter, .stability-filter {
 	background-color: #176663;
 	color: white;
 	font-size: 2rem;
