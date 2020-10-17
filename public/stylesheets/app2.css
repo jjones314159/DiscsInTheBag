@@ -170,7 +170,7 @@ footer a {
 
 /* Controls, Sorting, Filter
 ---------------------------------------------------------------------- */
-.brand-filter {
+.brand-filter, .category-filter, .stability.filter {
 	background-color: #176663;
 	color: white;
 	font-size: 2rem;
