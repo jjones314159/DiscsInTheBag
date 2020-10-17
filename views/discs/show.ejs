@@ -2,13 +2,13 @@
 
 <div class="container-fluid px-5">
 	<p>
-		<a href="/discs">< Back to Discs</a>
+		<a href="/discs" class="back-button">< Back to Discs</a>
 	</p>
-	<div class="float-left pr-5">
+	<div class="float-left pr-5 mt-3">
 		<img src=<%=disc.image%> class="profile-image">
 	</div>
 	<div class="float-left">
-		<h2 class="profile-name pb-2 mt-3"><%=disc.mold%></h2>
+		<h2 class="profile-name pb-2"><%=disc.mold%></h2>
 		<p><span class="disc-text pr-1">Brand: </span><span class="disc-text-entry"><%=disc.brand%></span></p>
 		<p><span class="disc-text pr-1">Category: </span><span class="disc-text-entry"><%=disc.category%></span></p>
 		<p><span class="disc-text pr-1">Flight numbers: </span><span class="disc-text-entry"><%=disc.speed%> | <%=disc.glide%> | <%=disc.turn%> | <%=disc.fade%></span></p>
