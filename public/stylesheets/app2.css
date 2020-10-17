@@ -122,9 +122,12 @@ td.unknown {
 	color: lightgray;
 }
 
+table {
+	font-size: 2rem;
+}
+
 td.cell {
 	padding-right: 3.25rem;
-	font-size: 2rem;
 }
 
 #about-table {
