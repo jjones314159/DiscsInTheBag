@@ -1,6 +1,6 @@
 <%- include("../partials/header") %>
 
-<div class="container">
+<div class="container-fluid px-5">
 	<p>
 		<a href="/discs">< Back to Discs</a>
 	</p>
@@ -9,18 +9,18 @@
 	</div>
 	<div class="float-left">
 		<h2 class="profile-name pb-2 mt-3"><%=disc.mold%></h2>
-		<p><span class="disc-text pr-1">Brand: </span><%=disc.brand%></p>
-		<p><span class="disc-text pr-1">Category: </span><%=disc.category%></p>
-		<p><span class="disc-text pr-1">Flight numbers: </span><%=disc.speed%> | <%=disc.glide%> | <%=disc.turn%> | <%=disc.fade%></p>
-		<p><span class="disc-text pr-1 pop-rank" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Based on the number of pros bagging the disc and the rankings of those pros.">Popularity Rank:</span> <%= helper.ordinal_suffix_of(disc.popularity_rank) %>
+		<p><span class="disc-text pr-1">Brand: </span><span class="disc-text-entry"><%=disc.brand%></span></p>
+		<p><span class="disc-text pr-1">Category: </span><span class="disc-text-entry"><%=disc.category%></span></p>
+		<p><span class="disc-text pr-1">Flight numbers: </span><span class="disc-text-entry"><%=disc.speed%> | <%=disc.glide%> | <%=disc.turn%> | <%=disc.fade%></span></p>
+		<p><span class="disc-text pr-1 pop-rank" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Based on the number of pros bagging the disc and the rankings of those pros.">Popularity Rank:</span><span class="disc-text-entry"> <%= helper.ordinal_suffix_of(disc.popularity_rank) %></span>
 		</p>
 	</div>
 
 	<div class="wrapper">
 		<div class="mb-3">
-			<h3>
+			<h1>
 				Pros using this disc
-			</h3>
+			</h1>
 		</div>
 		<div>
 			<table class="table-sm">
