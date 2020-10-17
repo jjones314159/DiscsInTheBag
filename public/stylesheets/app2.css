@@ -128,7 +128,9 @@ table {
 }
 
 td.cell {
-	padding-right: 3.25rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	padding-right: 2rem;
 }
 
 #about-table {
