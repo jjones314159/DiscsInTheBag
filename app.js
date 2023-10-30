@@ -48,7 +48,7 @@ app.use(function(req, res, next){
 // Seed admin user
 // var newUser = new Admin({
 // 	username: "admin",
-// 	password: "i8w6FpvA^rbt",
+// 	password: "",
 // 	admin: true
 // });
 // Admin.register(newUser, newUser.password, function(err, user){
