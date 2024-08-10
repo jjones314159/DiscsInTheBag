@@ -15,7 +15,7 @@ var express 		= require("express"),
 
 // APP CONFIG
 // mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect("process.env.DB_URL", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
+mongoose.connect("process.env.MONGODB_URI", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
 }).then(() => {
 		console.log("Database connected!");
 }).catch(err => {
