@@ -14,7 +14,6 @@ var express 		= require("express"),
 ;
 
 // APP CONFIG
-// mongoose.connect("mongodb://localhost/discsinthebag", { useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
 }).then(() => {
 		console.log("Database connected!");
@@ -74,6 +73,7 @@ app.get("/pros", function(req, res){
 		if(err){
 			console.log(err);
 		} else {
+			console.log("Fetched pros:", allPros); // Log the data here
 			res.render("pros/index", {pros:allPros});
 		}
 	})
