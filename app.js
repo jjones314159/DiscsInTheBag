@@ -14,12 +14,18 @@ var express 		= require("express"),
 ;
 
 // APP CONFIG
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true
 }).then(() => {
 		console.log("Database connected!");
 }).catch(err => {
 	console.log("Error: ", err.message);
 })
+// mongoose.connectWithPromise(process.env.MONGODB_URI, {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true
+//   })
+//   .then(() => console.log('Database connected!'))
+//   .catch(err => console.error('Error connecting to database:', err)); 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -67,17 +73,27 @@ app.get("/", function(req, res){
 	res.redirect("/pros");
 })
 
-app.get("/pros", function(req, res){
-	//get all pros
-	Pro.find({}, function(err, allPros){
-		if(err){
-			console.log(err);
-		} else {
-			console.log("Fetched pros:", allPros); // Log the data here
-			res.render("pros/index", {pros:allPros});
-		}
-	})
-})
+// app.get("/pros", function(req, res){
+// 	//get all pros
+// 	Pro.find({}, function(err, allPros){
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log("Fetched pros:", allPros); // Log the data here
+// 			res.render("pros/index", {pros:allPros});
+// 		}
+// 	})
+// })
+
+app.get("/pros", async (req, res) => {
+	try {
+	  const allPros = await Pro.find({});
+	  res.render("pros/index", { pros: allPros });
+	} catch (err) {
+	  console.error('Error fetching pros:', err);
+	  res.status(500).send('Error retrieving pros');
+	}
+  });
 
 // Pros New Route
 app.get("/pros/new", isLoggedIn, function(req,res) {
