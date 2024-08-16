@@ -51,19 +51,19 @@ app.use(function(req, res, next){
 });
 
 // Seed admin user
-// var newUser = new Admin({
-// 	username: "admin",
-// 	password: "",
-// 	admin: true
-// });
-// Admin.register(newUser, newUser.password, function(err, user){
-// 	if(err) {
-// 		console.log(err.message);
-// 	}
-// 	passport.authenticate("local")(req,res, function(){
-// 		console.log("User added and authenticated: " + user);
-// 	})
-// })
+var newUser = new Admin({
+	username: "admin",
+	password: "password",
+	admin: true
+});
+Admin.register(newUser, newUser.password, function(err, user){
+	if(err) {
+		console.log(err.message);
+	}
+	passport.authenticate("local")(req,res, function(){
+		console.log("User added and authenticated: " + user);
+	})
+})
 				
 //==============					
 // PROS ROUTES
