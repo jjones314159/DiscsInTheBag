@@ -165,51 +165,6 @@ app.get("/pros/:url_name/prodiscs/new", isLoggedIn, function(req,res) {
 	})
 })
 
-// // Prodisc create route - create new prodisc
-// app.post("/pros/:url_name/prodiscs", isLoggedIn, function(req, res){
-// 	var plastic = req.body.plastic;
-// 	var weight = req.body.weight;
-// 	var buy_url = req.body.buy_url;
-// 	var newProDisc = {plastic: plastic, weight: weight, buy_url: buy_url}
-// 	ProDisc.create(newProDisc, function(err, newlyCreated){
-// 		if(err){
-// 			console.log(err)
-// 		} else {
-// 			// find discid of created disc and add it to prodisc object
-// 			Disc.findById(req.body.disc_id, function(err, foundDisc) {
-// 				if(err){
-// 					console.log(err);
-// 				} else {
-// 					newlyCreated.disc.id = foundDisc._id;
-// 					newlyCreated.save();
-// 					//find pro and push to their record
-// 					Pro.findOne({url_name: req.params.url_name}, function(err, foundPro) {
-// 						if(err){
-// 							console.log(err);
-// 						} else {
-// 							// add prodisc to pro's bag
-// 							foundPro.pro_discs.push(newlyCreated);
-// 							foundPro.save();
-							
-// 							// increment disc popularity score based on pro rank
-// 							foundDisc.popularity_score += calculatePopScore(foundPro.rank);
-// 							foundDisc.save(function (err, product, numAffected) {
-// 								if (err) {
-// 									console.log(err);
-// 								} else {
-// 									updateAllPopRanks();
-// 								}
-// 							});
-							
-// 							res.redirect("/pros/"+req.params.url_name);
-// 						}
-// 					});
-// 				}
-// 			});
-// 		}
-// 	});
-// });
-
 // Prodisc create route - create new prodisc
 app.post("/pros/:url_name/prodiscs", isLoggedIn, async function(req, res) {
     try {
@@ -249,31 +204,77 @@ app.post("/pros/:url_name/prodiscs", isLoggedIn, async function(req, res) {
     }
 });
 
-// Prodisc destroy route
-app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, function(req,res) {
-	// find pro
+// // Prodisc destroy route
+// app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, function(req,res) {
+// 	// find pro
 	
-	// find disc and update pop score
-	ProDisc.findById(req.params.id, function(err, foundProdisc){
-		Disc.findById(foundProdisc.disc.id, function(err, foundDisc) {		
-			Pro.findOne({url_name: req.params.url_name}, function(err, foundPro) {
-				// decrement disc popularity score based on pro rank
-				foundDisc.popularity_score -= calculatePopScore(foundPro.rank);
-				foundDisc.save(function (err, product, numAffected) {
-					if (err) {
-						console.log(err);
-					} else {
-						updateAllPopRanks();
-				  	}
-				});
-			});
-		});
-	});
+// 	// find disc and update pop score
+// 	ProDisc.findById(req.params.id, function(err, foundProdisc){
+// 		Disc.findById(foundProdisc.disc.id, function(err, foundDisc) {		
+// 			Pro.findOne({url_name: req.params.url_name}, function(err, foundPro) {
+// 				// decrement disc popularity score based on pro rank
+// 				foundDisc.popularity_score -= calculatePopScore(foundPro.rank);
+// 				foundDisc.save(function (err, product, numAffected) {
+// 					if (err) {
+// 						console.log(err);
+// 					} else {
+// 						updateAllPopRanks();
+// 				  	}
+// 				});
+// 			});
+// 		});
+// 	});
 
-	ProDisc.deleteOne({_id: req.params.id}, function(err){
-		res.redirect("/pros/" + req.params.url_name);
-	})
-})
+// 	ProDisc.deleteOne({_id: req.params.id}, function(err){
+// 		res.redirect("/pros/" + req.params.url_name);
+// 	})
+// })
+
+// Prodisc destroy route
+app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, async function(req, res) {
+    try {
+        // Find the ProDisc and populate the associated Disc and Pro
+        const foundProdisc = await ProDisc.findById(req.params.id).populate('disc.id');
+        if (!foundProdisc) {
+            throw new Error('ProDisc not found');
+        }
+
+        const foundPro = await Pro.findOne({url_name: req.params.url_name});
+        if (!foundPro) {
+            throw new Error('Pro not found');
+        }
+
+        // Calculate the score decrement
+        const scoreDecrement = calculatePopScore(foundPro.rank);
+
+        // Update the Disc's popularity score atomically
+        const updatedDisc = await Disc.findByIdAndUpdate(
+            foundProdisc.disc.id,
+            { $inc: { popularity_score: -scoreDecrement } },
+            { new: true }
+        );
+
+        if (!updatedDisc) {
+            throw new Error('Failed to update Disc popularity score');
+        }
+
+        // Remove the ProDisc from the Pro's bag
+        foundPro.pro_discs = foundPro.pro_discs.filter(pd => !pd.equals(foundProdisc._id));
+        await foundPro.save();
+
+        // Delete the ProDisc
+        await ProDisc.deleteOne({_id: req.params.id});
+
+        // Update all popularity ranks
+        await updateAllPopRanks();
+
+        res.redirect("/pros/" + req.params.url_name);
+    } catch (err) {
+        console.error('Error deleting ProDisc:', err);
+        res.status(500).send('An error occurred while deleting the ProDisc');
+    }
+});
+
 
 
 
