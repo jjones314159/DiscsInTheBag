@@ -134,23 +134,42 @@ app.post("/pros", isLoggedIn, function(req, res) {
 	})
 })
 
-// Pros Edit & Update Routes 
-app.get("/pros/:url_name/edit", isLoggedIn, function(req, res){
-	Pro.findOne({url_name: req.params.url_name}, function(err, foundPro){
-		res.render("pros/edit", {pro: foundPro});
-	})
-})
+// // Pros Edit & Update Routes 
+// app.get("/pros/:url_name/edit", isLoggedIn, function(req, res){
+// 	Pro.findOne({url_name: req.params.url_name}, function(err, foundPro){
+// 		res.render("pros/edit", {pro: foundPro});
+// 	})
+// })
 
-app.put("/pros/:url_name", isLoggedIn, function(req, res) {
-	Pro.findOneAndUpdate({url_name: req.params.url_name}, req.body.pro, function(err, updatedPro){
-		if (err) {
-			res.redirect("/pros");
-		}
-		updateAllPopScores();
-		updateAllPopRanks();
-		res.redirect("/pros/" + req.params.url_name)
-	})
-})
+// app.put("/pros/:url_name", isLoggedIn, function(req, res) {
+// 	Pro.findOneAndUpdate({url_name: req.params.url_name}, req.body.pro, function(err, updatedPro){
+// 		if (err) {
+// 			res.redirect("/pros");
+// 		}
+// 		updateAllPopScores();
+// 		updateAllPopRanks();
+// 		res.redirect("/pros/" + req.params.url_name)
+// 	})
+// })
+
+// Pros Edit & Update Routes 
+app.put("/pros/:url_name", isLoggedIn, async function(req, res) {
+    try {
+        const updatedPro = await Pro.findOneAndUpdate(
+            {url_name: req.params.url_name},
+            req.body.pro,
+            {new: true}
+        );
+        
+        await updateAllPopScores();
+        await updateAllPopRanks();
+        
+        res.redirect("/pros/" + req.params.url_name);
+    } catch (err) {
+        console.error('Error updating pro:', err);
+        res.status(500).send('An error occurred while updating the pro');
+    }
+});
 
 //============
 // PRO DISC ROUTES
@@ -203,32 +222,6 @@ app.post("/pros/:url_name/prodiscs", isLoggedIn, async function(req, res) {
         res.status(500).send('An error occurred while creating the ProDisc');
     }
 });
-
-// // Prodisc destroy route
-// app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, function(req,res) {
-// 	// find pro
-	
-// 	// find disc and update pop score
-// 	ProDisc.findById(req.params.id, function(err, foundProdisc){
-// 		Disc.findById(foundProdisc.disc.id, function(err, foundDisc) {		
-// 			Pro.findOne({url_name: req.params.url_name}, function(err, foundPro) {
-// 				// decrement disc popularity score based on pro rank
-// 				foundDisc.popularity_score -= calculatePopScore(foundPro.rank);
-// 				foundDisc.save(function (err, product, numAffected) {
-// 					if (err) {
-// 						console.log(err);
-// 					} else {
-// 						updateAllPopRanks();
-// 				  	}
-// 				});
-// 			});
-// 		});
-// 	});
-
-// 	ProDisc.deleteOne({_id: req.params.id}, function(err){
-// 		res.redirect("/pros/" + req.params.url_name);
-// 	})
-// })
 
 // Prodisc destroy route
 app.delete("/pros/:url_name/prodiscs/:id", isLoggedIn, async function(req, res) {
@@ -441,48 +434,96 @@ function calculatePopScore(proRank) {
 	return popScore;
 }
 
-// only used when pro profiles are updated, which can include a potential rank change
-async function updateAllPopScores(){
-	try {
-		//reset disc popularity scores
-		await Disc.find({}, function(err, allDiscs){
-			if(err){
-				console.log(err);
-			} else {
-				for (i = 0; i < allDiscs.length; i++) {
-					allDiscs[i].popularity_score = 0;
-					allDiscs[i].save();
-				}
-			}
-		})
+// // only used when pro profiles are updated, which can include a potential rank change
+// async function updateAllPopScores(){
+// 	try {
+// 		//reset disc popularity scores
+// 		await Disc.find({}, function(err, allDiscs){
+// 			if(err){
+// 				console.log(err);
+// 			} else {
+// 				for (i = 0; i < allDiscs.length; i++) {
+// 					allDiscs[i].popularity_score = 0;
+// 					allDiscs[i].save();
+// 				}
+// 			}
+// 		})
 		
-		//find all pros, prodiscs, discs, and update disc pop scores
-		await Pro.find({}).populate({path : 'pro_discs', populate : {path : 'disc.id'}}).exec(function(err, foundPros){
-			if(err){
-				console.log(err);
-			} else {
-				//for each pro, find all pro discs				
-				foundPros.forEach(function(pro){
-					// set up empty array to track molds so as not to double count them toward pop score
-					var molds = [];
+// 		//find all pros, prodiscs, discs, and update disc pop scores
+// 		await Pro.find({}).populate({path : 'pro_discs', populate : {path : 'disc.id'}}).exec(function(err, foundPros){
+// 			if(err){
+// 				console.log(err);
+// 			} else {
+// 				//for each pro, find all pro discs				
+// 				foundPros.forEach(function(pro){
+// 					// set up empty array to track molds so as not to double count them toward pop score
+// 					var molds = [];
 					
-					// for each prodisc, find the disc and add a number to its pop score based on pro ranking
-					pro.pro_discs.forEach(function(proDisc){
-						//check if current proDisc is already in array of molds already counted
-						if(!molds.includes(proDisc.disc.id.mold)){
-						   	proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
-							proDisc.disc.id.save();
+// 					// for each prodisc, find the disc and add a number to its pop score based on pro ranking
+// 					pro.pro_discs.forEach(function(proDisc){
+// 						//check if current proDisc is already in array of molds already counted
+// 						if(!molds.includes(proDisc.disc.id.mold)){
+// 						   	proDisc.disc.id.popularity_score += calculatePopScore(pro.rank);
+// 							proDisc.disc.id.save();
 
-							//add mold to array of molds already added
-							molds.push(proDisc.disc.id.mold);
-						}
-					})			  
-				})
-			}
-		})
-	} catch (err) {
-		console.log(err);
-	}
+// 							//add mold to array of molds already added
+// 							molds.push(proDisc.disc.id.mold);
+// 						}
+// 					})			  
+// 				})
+// 			}
+// 		})
+// 	} catch (err) {
+// 		console.log(err);
+// 	}
+// }
+
+async function updateAllPopScores() {
+    try {
+        // Reset all disc popularity scores in one operation
+        await Disc.updateMany({}, { $set: { popularity_score: 0 } });
+
+        // Find all pros and populate their pro_discs and associated discs
+        const foundPros = await Pro.find({}).populate({
+            path: 'pro_discs',
+            populate: { path: 'disc.id' }
+        });
+
+        // Create a map to store disc scores
+        const discScores = new Map();
+
+        // Calculate scores for each pro's discs
+        for (const pro of foundPros) {
+            const seenMolds = new Set();
+            for (const proDisc of pro.pro_discs) {
+                if (proDisc.disc && proDisc.disc.id) {
+                    const { mold, _id } = proDisc.disc.id;
+                    if (!seenMolds.has(mold)) {
+                        const currentScore = discScores.get(_id) || 0;
+                        discScores.set(_id, currentScore + calculatePopScore(pro.rank));
+                        seenMolds.add(mold);
+                    }
+                }
+            }
+        }
+
+        // Update all disc scores in bulk
+        const bulkOps = Array.from(discScores).map(([discId, score]) => ({
+            updateOne: {
+                filter: { _id: discId },
+                update: { $set: { popularity_score: score } }
+            }
+        }));
+
+        if (bulkOps.length > 0) {
+            await Disc.bulkWrite(bulkOps);
+        }
+
+        console.log('All popularity scores updated successfully');
+    } catch (err) {
+        console.error('Error updating popularity scores:', err);
+        throw err;  // Rethrow the error for the caller to handle
+    }
 }
 
 function updateAllPopRanks(){
