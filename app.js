@@ -134,12 +134,12 @@ app.post("/pros", isLoggedIn, function(req, res) {
 	})
 })
 
-// // Pros Edit & Update Routes 
-// app.get("/pros/:url_name/edit", isLoggedIn, function(req, res){
-// 	Pro.findOne({url_name: req.params.url_name}, function(err, foundPro){
-// 		res.render("pros/edit", {pro: foundPro});
-// 	})
-// })
+// Pros Edit & Update Routes 
+app.get("/pros/:url_name/edit", isLoggedIn, function(req, res){
+	Pro.findOne({url_name: req.params.url_name}, function(err, foundPro){
+		res.render("pros/edit", {pro: foundPro});
+	})
+})
 
 // app.put("/pros/:url_name", isLoggedIn, function(req, res) {
 // 	Pro.findOneAndUpdate({url_name: req.params.url_name}, req.body.pro, function(err, updatedPro){
@@ -152,7 +152,6 @@ app.post("/pros", isLoggedIn, function(req, res) {
 // 	})
 // })
 
-// Pros Edit & Update Routes 
 app.put("/pros/:url_name", isLoggedIn, async function(req, res) {
     try {
         const updatedPro = await Pro.findOneAndUpdate(
