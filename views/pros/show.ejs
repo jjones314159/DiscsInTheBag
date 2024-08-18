@@ -4,22 +4,22 @@
 	<p>
 		<a href="/pros" class="back-button btn btn-lg btn-success mb-4"><i class="fas fa-angle-left"></i> Back to Pros</a>
 	</p>
-	<div class="float-left pr-5">
-		<img src=<%=pro.image%> class="profile-image">
-		<span class="image-credit">image credit: <%=pro.image_credit%></span>
+	<div class="row">
+		<div class="col-md-4">
+			<img src=<%=pro.image%> class="profile-image img-fluid">
+			<span class="image-credit">image credit: <%=pro.image_credit%></span>
+		</div>
+		<div class="col-md-8">
+			<h2 class="profile-name pb-2"><%=pro.name%></h2>
+			<p><span class="pro-text pr-1">Rank: </span><span class="pro-text-entry"><%=pro.rank%></span></p>
+			<p><span class="pro-text pr-1">Sponsor: </span><span class="pro-text-entry"><%=pro.sponsor%></span></p>
+			<p><span class="pro-text pr-1">Bag update: </span><span class="pro-text-entry"><%=pro.last_bag_update%> <a href="<%=pro.inthebag_url%>" target="_blank"><i class="fab fa-youtube"></i></a></span></p>
+		</div>
 	</div>
-	<div class="float-left">
-		<h2 class="profile-name pb-2"><%=pro.name%></h2>
-		<p><span class="pro-text pr-1">Rank: </span><span class="pro-text-entry"><%=pro.rank%></span></p>
-		<p><span class="pro-text pr-1">Sponsor: </span><span class="pro-text-entry"><%=pro.sponsor%></span></p>
-		<p><span class="pro-text pr-1">Bag update: </span><span class="pro-text-entry"><%=pro.last_bag_update%> <a href="<%=pro.inthebag_url%>" target="_blank"><i class="fab fa-youtube"></i></a></span></p>
-	</div>
-	<!-- <div class="profile-disc-category float-left mt-5">
-		Distance Drivers
-	</div> -->
+
 	<div class="wrapper">
-		<div>
-			<table class="table-sm">
+		<div class="table-responsive">
+			<table class="table table-sm">
 			  <thead>
 				<tr>
 				  <th scope="col">Category</th>

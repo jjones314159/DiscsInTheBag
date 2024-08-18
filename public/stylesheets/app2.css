@@ -75,8 +75,97 @@ table a.btn {
 
 .wrapper {
 	clear:both;
-	padding-top: 50px;
+	padding-top: 25px;
 }
+
+/* Pro show page responsive sizing
+---------------------------------------------------------------------- */
+@media (min-width: 768px) {
+    .table-responsive {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .table-sm {
+        font-size: 0.9rem;
+    }
+    
+    .table-sm td, .table-sm th {
+        padding: 0.5rem;
+    }
+
+    .profile-name {
+        font-size: 2.5rem;
+    }
+    
+    .pro-text, .disc-text, .pro-text-entry, .disc-text-entry {
+        font-size: 1.5rem;
+    }
+    
+    .category-cell {
+        font-size: 1.25rem;
+    }
+    
+    td.cell {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-right: 1rem;
+    }
+    
+    table {
+        font-size: 1.5rem;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .table-responsive {
+        max-width: 80%;
+    }
+    
+    .table-sm {
+        font-size: 0.8rem;
+    }
+    
+    .table-sm td, .table-sm th {
+        padding: 0.3rem;
+    }
+
+    .profile-name {
+        font-size: 2.25rem;
+    }
+    
+    .pro-text, .disc-text, .pro-text-entry, .disc-text-entry {
+        font-size: 1.25rem;
+    }
+    
+    .category-cell {
+        font-size: 1rem;
+    }
+    
+    td.cell {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    
+    table {
+        font-size: 1.25rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .table-responsive {
+        max-width: 70%;
+    }
+}
+
+/* End of Pro show page responsive sizing
+---------------------------------------------------------------------- */
 
 .discs-index-container .card {
 	border: none;
