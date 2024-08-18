@@ -88,8 +88,8 @@ table a.btn {
 ---------------------------------------------------------------------- */
 @media (min-width: 768px) {
     .table-responsive {
-        max-width: 90%;
-        margin: 0 auto;
+        max-width: 100%;
+        margin-left: 0;
     }
     
     .table-sm {
@@ -97,7 +97,8 @@ table a.btn {
     }
     
     .table-sm td, .table-sm th {
-        padding: 0.5rem;
+        padding: 0.3rem 0.5rem;
+		vertical-align: middle;
     }
 
     .profile-name {
@@ -113,9 +114,9 @@ table a.btn {
     }
     
     td.cell {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        padding-right: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-right: 0.5rem;
     }
     
     table {
