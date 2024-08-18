@@ -23,9 +23,16 @@ nav {
 	font-size: 2rem;
 }
 
+.image-container {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
 .profile-image {
-	width: 250px;
-	border-radius: 10px;
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
 }
 
 .profile-name {
@@ -33,10 +40,9 @@ nav {
 }
 
 .image-credit {
-	font-size: .5rem;
+	font-size: .75rem;
 	color: gray;
 	display: block;
-	text-align: center;
 }
 
 .pro-text, .disc-text {
