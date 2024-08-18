@@ -131,7 +131,7 @@ table a.btn {
 
 @media (min-width: 992px) {
     .table-responsive {
-        max-width: 80%;
+        max-width: 100%;
     }
     
     .table-sm {
@@ -231,12 +231,6 @@ td.unknown {
 table {
 	font-size: 2rem;
 	text-align: left;
-}
-
-td.cell {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	padding-right: 2rem;
 }
 
 .about-page {
