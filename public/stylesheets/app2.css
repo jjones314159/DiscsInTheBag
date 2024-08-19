@@ -84,115 +84,6 @@ table a.btn {
 	padding-top: 25px;
 }
 
-/* Responsive sizing
----------------------------------------------------------------------- */
-@media (min-width: 768px) {
-    .table-responsive {
-        max-width: 100%;
-        margin-left: 0;
-    }
-    
-    .table-sm {
-        font-size: 0.9rem;
-    }
-    
-    .table-sm td, .table-sm th {
-        padding: 0.3rem 0.5rem;
-		vertical-align: middle;
-    }
-
-    .profile-name {
-        font-size: 2.5rem;
-    }
-    
-    .pro-text, .disc-text, .pro-text-entry, .disc-text-entry {
-        font-size: 1.5rem;
-    }
-    
-    .category-cell {
-        font-size: 1.25rem;
-    }
-    
-    td.cell {
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-right: 0.5rem;
-    }
-    
-    table {
-        font-size: 1.5rem;
-    }
-
-    .btn-sm {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .table-responsive {
-        max-width: 100%;
-    }
-    
-    .table-sm {
-        font-size: 0.8rem;
-    }
-    
-    .table-sm td, .table-sm th {
-        padding: 0.3rem;
-    }
-
-    .profile-name {
-        font-size: 2.25rem;
-    }
-    
-    .pro-text, .disc-text, .pro-text-entry, .disc-text-entry {
-        font-size: 1.25rem;
-    }
-    
-    .category-cell {
-        font-size: 1rem;
-    }
-    
-    td.cell {
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        padding-right: 0.75rem;
-    }
-    
-    table {
-        font-size: 1.25rem;
-    }
-
-    .about-page {
-        font-size: 1.25rem;
-      }
-    
-    .about-page h1 {
-        font-size: 2rem;
-        margin-top: 2rem;
-    }
-    
-    #about-table {
-        width: 40%;
-        font-size: 1rem;
-    }
-    
-    #about-table th,
-    #about-table td {
-        padding: 0.3rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .table-responsive {
-        max-width: 70%;
-    }
-}
-
-/* End of responsive sizing
----------------------------------------------------------------------- */
-
 .discs-index-container .card {
 	border: none;
 }
@@ -389,38 +280,111 @@ button:focus {
 	font-size: 2rem;
 }
 
+/* Responsive sizing
+---------------------------------------------------------------------- */
+@media (min-width: 768px) {
+    .table-responsive {
+        max-width: 100%;
+        margin-left: 0;
+    }
+    
+    .table-sm {
+        font-size: 0.9rem;
+    }
+    
+    .table-sm td, .table-sm th {
+        padding: 0.3rem 0.5rem;
+		vertical-align: middle;
+    }
 
-/* 
-.control:hover {
-    background: #3f3f3f;
+    .profile-name {
+        font-size: 2.5rem;
+    }
+    
+    .pro-text, .disc-text, .pro-text-entry, .disc-text-entry {
+        font-size: 1.5rem;
+    }
+    
+    .category-cell {
+        font-size: 1.25rem;
+    }
+    
+    td.cell {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    table {
+        font-size: 1.5rem;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
 }
 
-.control[data-sort]:after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid;
-    border-left: 2px solid;
-    top: calc(50% - 6px);
-    left: calc(50% - 6px);
-    transform:  translateY(1px) rotate(45deg);
+@media (min-width: 992px) {
+    .table-responsive {
+        max-width: 100%;
+    }
+    
+    .table-sm {
+        font-size: 0.8rem;
+    }
+    
+    .table-sm td, .table-sm th {
+        padding: 0.3rem;
+    }
+
+    .profile-name {
+        font-size: 2.25rem;
+    }
+    
+    .pro-text, .disc-text, .pro-text-entry, .disc-text-entry {
+        font-size: 1.25rem;
+    }
+    
+    .category-cell {
+        font-size: 1rem;
+    }
+    
+    td.cell {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    
+    table {
+        font-size: 1.25rem;
+    }
+
+    .about-page {
+        font-size: 1.25rem;
+      }
+    
+    .about-page h1 {
+        font-size: 2rem;
+        margin-top: 2rem;
+    }
+    
+    #about-table {
+        width: 40%;
+        font-size: 1rem;
+    }
+    
+    #about-table th,
+    #about-table td {
+        padding: 0.3rem;
+    }
 }
 
-.control[data-sort*=":desc"]:after {
-    transform:  translateY(-4px) rotate(-135deg);
-} */
-
-
-
-/* .mixitup-control-active[data-filter]:after {
-    background: transparent;
+@media (min-width: 1200px) {
+    .table-responsive {
+        max-width: 70%;
+    }
 }
 
-.control:first-of-type {
-    border-radius: 3px 0 0 3px;
-}
-
-.control:last-of-type {
-    border-radius: 0 3px 3px 0;
-} */
+/* End of responsive sizing
+---------------------------------------------------------------------- */
