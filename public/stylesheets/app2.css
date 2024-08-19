@@ -84,7 +84,7 @@ table a.btn {
 	padding-top: 25px;
 }
 
-/* Pro show page responsive sizing
+/* Responsive sizing
 ---------------------------------------------------------------------- */
 @media (min-width: 768px) {
     .table-responsive {
@@ -163,6 +163,25 @@ table a.btn {
     table {
         font-size: 1.25rem;
     }
+
+    .about-page {
+        font-size: 1.25rem;
+      }
+    
+    .about-page h1 {
+        font-size: 2rem;
+        margin-top: 2rem;
+    }
+    
+    #about-table {
+        width: 40%;
+        font-size: 1rem;
+    }
+    
+    #about-table th,
+    #about-table td {
+        padding: 0.3rem;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -171,7 +190,7 @@ table a.btn {
     }
 }
 
-/* End of Pro show page responsive sizing
+/* End of responsive sizing
 ---------------------------------------------------------------------- */
 
 .discs-index-container .card {
