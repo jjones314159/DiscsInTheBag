@@ -36,7 +36,7 @@
 				<% pro.pro_discs.forEach(function(proDisc){ %>
 					<tr>
 					  <td class="cell category-cell"><%=proDisc.disc.id.category%></td>
-					  <td class="cell"><a href="/discs/<%=proDisc.disc.id.mold%>" class="btn btn-outline-info"><%=proDisc.disc.id.mold%></a></td>
+					  <td class="cell"><a href="/discs/<%=proDisc.disc.id.mold%>" class="btn btn-info"><%=proDisc.disc.id.mold%></a></td>
 					  <td class="cell"><%=proDisc.disc.id.brand%></td>
 					  <td class="cell"><%=proDisc.plastic%></td>
 					  <% if (proDisc.weight){ %>  
